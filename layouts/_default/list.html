@@ -1,5 +1,0 @@
-{{ define "main" }}
-<section class="page-intro container"><p class="eyebrow">ARCHIVE</p><h1>{{ .Title }}</h1><p>所有写下来的东西，都在这里。</p></section>
-<section class="posts-section container"><div class="post-list">{{ range .Pages }}{{ partial "post-card.html" . }}{{ end }}</div></section>
-{{ end }}
-

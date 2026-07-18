@@ -1,0 +1,25 @@
+#!/bin/sh
+# Blocks a push when newly added lines resemble common credentials.
+# This is intentionally dependency-free so it works on every developer machine.
+set -eu
+
+zero_sha='0000000000000000000000000000000000000000'
+patterns='gh[pousr]_[A-Za-z0-9_]{20,}|github_pat_[A-Za-z0-9_]{20,}|AIza[0-9A-Za-z_-]{35}|AKIA[0-9A-Z]{16}|ASIA[0-9A-Z]{16}|sk_(live|test)_[0-9A-Za-z]{16,}|xox[baprs]-[0-9A-Za-z-]{10,}|-----BEGIN( [A-Z]+)? PRIVATE KEY-----'
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [ "$local_sha" = "$zero_sha" ]; then
+    continue
+  fi
+
+  if [ "$remote_sha" = "$zero_sha" ]; then
+    commit_range="$local_sha"
+  else
+    commit_range="$remote_sha..$local_sha"
+  fi
+
+  if git log -p --format= "$commit_range" | grep -E "^\+[^+].*($patterns)" >/dev/null; then
+    echo "Push blocked: possible credential detected in newly added content." >&2
+    echo "Remove the credential, use GitHub Actions secrets, then try again." >&2
+    exit 1
+  fi
+done

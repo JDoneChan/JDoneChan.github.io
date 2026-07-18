@@ -1,0 +1,26 @@
+<article class="max-w-3xl py-10 sm:py-16">
+  <p class="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary-600 dark:text-primary-400">Personal notes</p>
+  <h1 class="mb-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral sm:text-5xl">{{ .Title }}</h1>
+  <div class="prose text-lg dark:prose-invert">{{ .Content }}</div>
+  <div class="mt-8 flex flex-wrap gap-3">
+    <a class="rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white no-underline transition hover:bg-primary-500" href="{{ "posts/" | relLangURL }}">浏览文章</a>
+    <a class="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-semibold text-neutral-700 no-underline transition hover:border-primary-400 hover:text-primary-600 dark:border-neutral-600 dark:text-neutral-200" href="{{ "archives/" | relLangURL }}">查看归档</a>
+  </div>
+</article>
+
+{{ $articles := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+{{ $featured := where $articles "Params.featured" true }}
+{{ with $featured }}
+  <section class="mb-16">
+    <div class="mb-6 flex items-end justify-between border-b border-neutral-200 pb-3 dark:border-neutral-700">
+      <div><p class="mb-1 text-sm font-medium text-primary-600 dark:text-primary-400">EDITOR'S PICKS</p><h2 class="m-0 text-2xl font-extrabold">热门文章</h2></div>
+      <a class="text-sm font-semibold text-primary-600 hover:underline dark:text-primary-400" href="{{ "posts/" | relLangURL }}">全部文章 →</a>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+      {{ range first 3 .ByDate.Reverse }}{{ partial "article-link/card.html" . }}{{ end }}
+    </div>
+  </section>
+{{ end }}
+
+<section class="pb-10">{{ partial "recent-articles/main.html" . }}</section>
+

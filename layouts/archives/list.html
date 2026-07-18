@@ -1,0 +1,15 @@
+{{ define "main" }}
+  <header class="mt-5 mb-10">
+    <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-primary-600 dark:text-primary-400">Archive</p>
+    <h1 class="text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+    <div class="prose mt-4 dark:prose-invert">{{ .Content }}</div>
+  </header>
+  {{ $articles := where site.RegularPages "Type" "in" site.Params.mainSections }}
+  {{ range $articles.GroupByDate "2006" }}
+    <section class="mb-12">
+      <h2 class="mb-4 border-b border-neutral-200 pb-3 text-2xl font-bold dark:border-neutral-700">{{ .Key }}</h2>
+      <div class="space-y-5">{{ range .Pages }}{{ partial "article-link/simple.html" . }}{{ end }}</div>
+    </section>
+  {{ end }}
+{{ end }}
+

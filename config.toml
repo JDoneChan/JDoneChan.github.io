@@ -1,15 +1,86 @@
 baseURL = 'https://jdonechan.github.io/'
-languageCode = 'zh-cn'
+locale = 'zh-cn'
+defaultContentLanguage = 'zh-cn'
 title = 'JDoneChan · 个人博客'
+theme = 'blowfish'
 enableRobotsTXT = true
 hasCJKLanguage = true
-paginate = 8
+summaryLength = 32
+
+[pagination]
+  pagerSize = 12
+
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
 
 [params]
-  author = 'JDoneChan'
+  isoCode = 'zh-cn'
+  colorScheme = 'forest'
+  defaultAppearance = 'light'
+  autoSwitchAppearance = true
+  enableSearch = true
+  enableCodeCopy = true
+  enableStructuredBreadcrumbs = true
+  mainSections = ['posts']
   description = '记录技术、产品与生活中的长期思考。'
-  motto = '保持好奇，持续创造。'
-  github = 'https://github.com/JDoneChan'
+
+[params.author]
+  name = 'JDoneChan'
+  headline = '记录技术、产品与生活中的长期思考。'
+  bio = '保持好奇，持续创造。'
+  links = [{ github = 'https://github.com/JDoneChan' }]
+
+[params.header]
+  layout = 'fixed-fill-blur'
+
+[params.footer]
+  showMenu = true
+  showCopyright = true
+  showThemeAttribution = false
+  showAppearanceSwitcher = true
+  showScrollToTop = true
+
+[params.homepage]
+  layout = 'custom'
+  showRecent = true
+  showRecentItems = 6
+  showMoreLink = true
+  showMoreLinkDest = '/posts/'
+  cardView = true
+
+[params.article]
+  showDate = true
+  showDateUpdated = true
+  showBreadcrumbs = true
+  showReadingTime = true
+  showTableOfContents = true
+  showHeadingAnchors = true
+  showPagination = true
+  showRelatedContent = true
+  relatedContentLimit = 6
+  showTaxonomies = true
+  showEdit = true
+  editURL = 'https://github.com/JDoneChan/JDoneChan.github.io/tree/main/content'
+  editAppendPath = true
+
+[params.list]
+  showHero = false
+  showBreadcrumbs = true
+  showSummary = true
+  showTableOfContents = false
+  showCards = true
+  cardView = true
+  groupByYear = true
+
+[languages]
+  [languages.zh-cn]
+    locale = 'zh-cn'
+    label = '简体中文'
+    weight = 1
 
 [markup]
   [markup.highlight]
@@ -21,14 +92,31 @@ paginate = 8
 [menu]
   [[menu.main]]
     name = '首页'
-    url = '/'
+    pageRef = '/'
     weight = 1
   [[menu.main]]
     name = '文章'
-    url = '/posts/'
+    pageRef = 'posts'
     weight = 2
   [[menu.main]]
-    name = '关于'
-    url = '/about/'
+    name = '归档'
+    pageRef = 'archives'
     weight = 3
+  [[menu.main]]
+    name = '关于'
+    pageRef = 'about'
+    weight = 4
+  [[menu.main]]
+    identifier = 'github'
+    pre = 'github'
+    url = 'https://github.com/JDoneChan'
+    weight = 10
 
+  [[menu.footer]]
+    name = '标签'
+    pageRef = 'tags'
+    weight = 10
+  [[menu.footer]]
+    name = '分类'
+    pageRef = 'categories'
+    weight = 20
