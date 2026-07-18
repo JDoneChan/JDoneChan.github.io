@@ -1,3 +1,10 @@
+{{ $backgroundImage := resources.Get "img/background.svg" }}
+{{ with $backgroundImage }}
+  <div class="home-motion-background" aria-hidden="true">
+    <img src="{{ .RelPermalink }}" alt="" class="h-full w-full object-cover object-center">
+  </div>
+{{ end }}
+
 <article class="max-w-3xl py-10 sm:py-16">
   <p class="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary-600 dark:text-primary-400">Personal notes</p>
   <h1 class="mb-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral sm:text-5xl">{{ .Title }}</h1>
@@ -23,4 +30,3 @@
 {{ end }}
 
 <section class="pb-10">{{ partial "recent-articles/main.html" . }}</section>
-

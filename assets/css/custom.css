@@ -3,6 +3,32 @@
   --bf-secondary: 135, 174, 109;
 }
 
+.home-motion-background {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: min(680px, 72vh);
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.72;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%);
+}
+
+.home-motion-background::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(to bottom, rgb(var(--color-neutral-50) / 0.12), rgb(var(--color-neutral-50) / 0.88));
+}
+
+.dark .home-motion-background {
+  opacity: 0.32;
+}
+
+.dark .home-motion-background::after {
+  background: linear-gradient(to bottom, rgb(var(--color-neutral-800) / 0.18), rgb(var(--color-neutral-800) / 0.92));
+}
+
 .article-content :is(h2, h3, h4, h5, h6) .anchor {
   text-decoration: none;
 }
