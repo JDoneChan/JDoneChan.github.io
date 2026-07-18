@@ -18,10 +18,10 @@ hugo server -D
 
 ## 防止敏感信息泄漏
 
-仓库配置了 `.githooks/pre-push` 本地检查和 GitHub Actions Gitleaks 扫描。首次克隆后执行：
+仓库配置了 `.githooks/pre-commit` 构建检查、`.githooks/pre-push` 密钥检查和 GitHub Actions Gitleaks 扫描。首次克隆后执行：
 
 ```bash
 git config core.hooksPath .githooks
 ```
 
-密钥请存放在 GitHub Actions Secrets 中，不要提交到文章、配置或工作流文件。
+每次提交前会自动构建 Hugo 站点；构建失败时提交会被阻止。每次推送前还会扫描常见凭据格式。密钥请存放在 GitHub Actions Secrets 中，不要提交到文章、配置或工作流文件。

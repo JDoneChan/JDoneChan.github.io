@@ -1,0 +1,15 @@
+#!/bin/sh
+# Verifies that the Hugo site still renders before every commit.
+set -eu
+
+repo_root=$(git rev-parse --show-toplevel)
+cache_dir="${TMPDIR:-/tmp}/jdonechan-hugo-cache"
+
+echo "Checking staged whitespace..."
+git diff --cached --check
+
+echo "Building Hugo site..."
+cd "$repo_root"
+hugo --gc --minify --quiet --cacheDir "$cache_dir"
+
+echo "Pre-commit checks passed."
