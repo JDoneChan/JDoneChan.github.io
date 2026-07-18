@@ -1,0 +1,8 @@
+{{ define "main" }}
+<article class="article container">
+  <div class="article-header"><p class="eyebrow">{{ with .Params.categories }}{{ index . 0 }}{{ else }}NOTE{{ end }}</p><h1>{{ .Title }}</h1><div class="post-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006 年 01 月 02 日" }}</time>{{ with .ReadingTime }}<span>约 {{ . }} 分钟阅读</span>{{ end }}</div></div>
+  <div class="article-body">{{ .Content }}</div>
+  {{ with .Params.tags }}<div class="tags">{{ range . }}<span>#{{ . }}</span>{{ end }}</div>{{ end }}
+</article>
+{{ end }}
+

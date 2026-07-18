@@ -1,0 +1,34 @@
+baseURL = 'https://jdonechan.github.io/'
+languageCode = 'zh-cn'
+title = 'JDoneChan · 个人博客'
+enableRobotsTXT = true
+hasCJKLanguage = true
+paginate = 8
+
+[params]
+  author = 'JDoneChan'
+  description = '记录技术、产品与生活中的长期思考。'
+  motto = '保持好奇，持续创造。'
+  github = 'https://github.com/JDoneChan'
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    style = 'github'
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[menu]
+  [[menu.main]]
+    name = '首页'
+    url = '/'
+    weight = 1
+  [[menu.main]]
+    name = '文章'
+    url = '/posts/'
+    weight = 2
+  [[menu.main]]
+    name = '关于'
+    url = '/about/'
+    weight = 3
+
